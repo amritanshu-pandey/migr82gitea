@@ -12,6 +12,7 @@ with open("HISTORY.rst") as history_file:
 
 requirements = [
     "Click>=7.0",
+    "mgsc==0.1.0-alpha.3",
     "requests",
     "GitPython",
 ]
