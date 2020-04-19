@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """The setup script."""
+import os
 
 from setuptools import setup, find_packages
 
@@ -9,6 +10,8 @@ with open("README.md") as readme_file:
 
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
+
+version = os.getenv('DRONE_TAG', 'ci')
 
 requirements = [
     "Click>=7.0",
@@ -51,6 +54,6 @@ setup(
     test_suite="tests",
     extras_require={"test": test_requirements},
     url="https://github.com/amritanshu-pandey/giteamigration",
-    version="0.1.0",
+    version=version,
     zip_safe=False,
 )
