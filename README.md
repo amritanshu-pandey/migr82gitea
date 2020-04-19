@@ -1,6 +1,8 @@
 gitea-migrations
 ================
 
+[![Build Status](https://cloud.drone.io/api/badges/amritanshu-pandey/migr82gitea/status.svg)](https://cloud.drone.io/amritanshu-pandey/migr82gitea)
+
 
 Program to create and sync gitea migrations from various supported git servers
 
