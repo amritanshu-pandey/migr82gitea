@@ -23,7 +23,7 @@ steps:
     image: python:3.8
     commands:
       - pip3 install -e .[test]
-      - gitea-migration -h
+      - gitea-migration --help
   - name: publish
     image: python:3.8
     commands:
