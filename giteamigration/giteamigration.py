@@ -1,6 +1,6 @@
 from requests.exceptions import HTTPError
 
-from giteamigration.service import Gitea
+from mgsc.service import Gitea
 
 
 class GiteaMigration:

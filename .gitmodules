@@ -1,0 +1,3 @@
+[submodule "dependencies/mgsc"]
+	path = dependencies/mgsc
+	url = git@github.com:amritanshu-pandey/mgsc.git

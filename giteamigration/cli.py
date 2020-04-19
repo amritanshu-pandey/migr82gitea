@@ -3,7 +3,7 @@ import sys
 import click
 
 from requests.exceptions import HTTPError
-from giteamigration.service import Gitea, Github, Gitlab
+from mgsc.service import Gitea, Github, Gitlab
 from giteamigration.giteamigration import GiteaMigration
 
 
@@ -63,8 +63,12 @@ def main(
             print("------------------------\n")
             continue
         except HTTPError as e:
-            print(e)
-            print(f"Migration already exists: {repo}. Synchronising migration.")
+            if e.args[0]["code"] == 409:
+                print(f"Migration already exists: {repo}. Synchronising migration.")
+            else:
+                print(e)
+                status["failed"] += 1
+                print("------------------------\n")
 
         try:
             migration.sync()
