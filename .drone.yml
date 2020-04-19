@@ -10,7 +10,10 @@ steps:
   - name: submodules
     image: alpine/git
     commands:
-      - git submodule update --recursive --remote
+      - git submodule update --init --recursive
+      - git submodule status
+      - ls -lrtah
+      - ls -lrtah **/**
   - name: linting
     image: python:3.8
     commands:
