@@ -47,7 +47,7 @@ steps:
         from_secret: pypi_username
       pypi_password:
         from_secret: pypi_password
-    depends_on: [linting, tests]
+    depends_on: [linting, tests, build-exe]
     when:
       event: [tag]
 
