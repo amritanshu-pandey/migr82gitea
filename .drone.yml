@@ -17,6 +17,14 @@ steps:
     commands:
       - pip3 install -e .[test]
       - gitea-migration --help
+  - name: build-exe
+    image: python:3.8
+    commands:
+      - pip3 install -r requirements_dev.txt
+      - pip3 install .
+      - pyinstaller executable.py --name gitea-migration --onefile
+      - ls -lrtah dist
+      - ./dist/gitea-migration --help
   - name: publish
     image: python:3.8
     commands:
