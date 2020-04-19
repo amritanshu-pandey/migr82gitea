@@ -20,7 +20,7 @@ steps:
   - name: build-exe
     image: python:3.8
     commands:
-      - pip3 install -r requirements_dev.txt
+      - pip3 install -U -r requirements_dev.txt
       - pip3 install .
       - pyinstaller executable.py --name gitea-migration --onefile
       - ls -lrtah dist
