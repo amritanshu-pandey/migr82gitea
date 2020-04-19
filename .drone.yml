@@ -7,6 +7,10 @@ platform:
   arch: amd64
 
 steps:
+  - name: submodules
+    image: alpine/git
+    commands:
+      - git submodule update --recursive --remote
   - name: linting
     image: python:3.8
     commands:
