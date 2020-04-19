@@ -42,22 +42,22 @@ setup(
     description="Program to one way sync git repositories between supported git servers",
     entry_points={
         'console_scripts': [
-            'migr82gitea=migr82gitea.cli:main',
+            'gitea-migration=giteamigration.cli:main',
         ],
     },
     install_requires=requirements,
     license="MIT license",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
-    keywords='migr82gitea',
-    name='migr82gitea',
-    packages=find_packages(include=['migr82gitea', 'migr82gitea.*']),
+    keywords='giteamigration',
+    name='giteamigration',
+    packages=find_packages(include=['giteamigration', 'giteamigration.*']),
     setup_requires=setup_requirements,
     test_suite='tests',
     extras_require={
             'test': test_requirements
         },
-    url='https://github.com/amritanshu-pandey/migr82gitea',
+    url='https://github.com/amritanshu-pandey/giteamigration',
     version='0.1.0',
     zip_safe=False,
 )

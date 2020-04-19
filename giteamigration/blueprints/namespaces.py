@@ -1,14 +1,10 @@
 import os
 
-from gitback.blueprints import Repository
+from giteamigration.blueprints import Repository
 
 
 class Namespace:
-    def __init__(
-        self, name: str,
-        repositories: [Repository] = None,
-        parent=None
-    ):
+    def __init__(self, name: str, repositories: [Repository] = None, parent=None):
         self.name = name
         self.parent = parent
         self.repositories = repositories
@@ -28,4 +24,4 @@ class Namespace:
         os.path.sep.join(self.path[::-1])
 
     def __repr__(self):
-        return f'{self.name}'
+        return f"{self.name}"

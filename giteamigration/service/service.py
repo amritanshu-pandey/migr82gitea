@@ -1,9 +1,10 @@
 import abc
+import fnmatch
 
 from urllib.parse import urlsplit
 
-from gitback.service.session import Session
-from gitback.blueprints import Repository
+from giteamigration.service.session import Session
+from giteamigration.blueprints import Repository
 
 
 class GitService(abc.ABC):
@@ -14,14 +15,14 @@ class GitService(abc.ABC):
 
         urlscheme = urlsplit(url).scheme
 
-        if urlscheme.lower() in ('local', 'file'):
+        if urlscheme.lower() in ("local", "file"):
             self.session = None
         else:
             self.session = Session(
                 servertype=self.servertype,
                 url=url,
                 username=self.username,
-                secret=self.secret
+                secret=self.secret,
             )
 
     @abc.abstractproperty
@@ -31,6 +32,11 @@ class GitService(abc.ABC):
     @abc.abstractproperty
     def repositories(self) -> [Repository]:
         pass
+
+    def repositories_filtered(self, filterpattern):
+        for repo in self.repositories:
+            if fnmatch.fnmatch(repo.name, filterpattern):
+                yield repo
 
     @abc.abstractmethod
     def get_namespace_repos(self):

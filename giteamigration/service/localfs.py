@@ -4,20 +4,19 @@ import git
 
 from urllib.parse import urlsplit
 
-from gitback.service.service import GitService
-from gitback.blueprints import Repository, Namespace
-from gitback.blueprints.repositories import is_git_repo
+from giteamigration.service.service import GitService
+from giteamigration.blueprints import Repository, Namespace
+from giteamigration.blueprints.repositories import is_git_repo
 
 
 class LocalFS(GitService):
-    def __init__(
-            self, url, username=None, secret=None):
+    def __init__(self, url, username=None, secret=None):
         super().__init__(url, username, secret)
         self.root = pathlib.Path(urlsplit(url).path)
 
     @property
     def servertype(self):
-        return 'localfs'
+        return "localfs"
 
     @staticmethod
     def _get_path_stem(path):
@@ -33,17 +32,17 @@ class LocalFS(GitService):
         for repo in all_repos:
             yield Repository(
                 name=self._get_path_stem(repo),
-                namespace=Namespace('root'),
+                namespace=Namespace("root"),
                 ssh_url=None,
                 http_url=None,
                 localfs_url=repo.absolute(),
-                description=repo.name
+                description=repo.name,
             )
 
     def get_namespace_repos(self, namespace: Namespace):
         namespace_path = self.root / namespace
 
-        if namespace == 'root':
+        if namespace == "root":
             for repo in self.repositories:
                 yield repo
         else:
@@ -55,13 +54,13 @@ class LocalFS(GitService):
                         ssh_url=None,
                         http_url=None,
                         localfs_url=directory.absolute(),
-                        description=directory.name
+                        description=directory.name,
                     )
 
     def get_namespaces(self, namespace: Namespace = None) -> Namespace:
         namespaces = []
 
-        namespace_path = ''
+        namespace_path = ""
         if namespace:
             namespace_path = namespace.fspath
         for directory in (self.root / namespace_path).iterdir():
@@ -71,8 +70,8 @@ class LocalFS(GitService):
         for ns in namespaces:
             yield Namespace(
                 name=self._get_path_stem(ns),
-                parent=namespace or Namespace('root'),
-                repositories=self.get_namespace_repos(ns)
+                parent=namespace or Namespace("root"),
+                repositories=self.get_namespace_repos(ns),
             )
 
     def create_namespace(self, parentns: str, name: str):
@@ -92,7 +91,7 @@ class LocalFS(GitService):
             ssh_url=None,
             http_url=None,
             localfs_url=repo_path.absolute(),
-            description=name
+            description=name,
         )
 
     @property
