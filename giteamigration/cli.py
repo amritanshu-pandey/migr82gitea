@@ -12,7 +12,7 @@ services = {"gitea": Gitea, "github": Github, "gitlab": Gitlab}
 
 @click.command()
 @click.option("--giteaurl", required=True, help="Gitea URL")
-@click.option("--giteauser", required=True, help="Gitea user")
+@click.option("--giteauser", required=False, help="Gitea user")
 @click.option("--giteapass", required=True, help="Gitea password")
 @click.option("--giteaorg", required=True, help="Gitea Organisation name")
 @click.option("--sourcetype", required=True, help="Source GIT server type")
@@ -85,7 +85,7 @@ def main(
     print("==================")
     print("Migration complete.")
     print(f'Successfully migrations: {status["success"]}')
-    print(f'Failed migrations: {status["success"]}')
+    print(f'Failed migrations: {status["failed"]}')
     if status["failed"] > 0:
         return RETURN_CODE_FAILED_MIGRATIONS
     if status["failed"] == 0 and status["success"] > 0:
